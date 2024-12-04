@@ -13,6 +13,14 @@
         "url": "https://github.com/MercuryWorkshop/AnuraOS/issues"
     },
     "homepage": "https://github.com/MercuryWorkshop/AnuraOS#readme",
+    "scripts": {
+        "build": "npm run setup && npm run clone-repo && npm run build-project",
+        "start": "npm run server",
+        "setup": "rustup target add wasm32-unknown-unknown && rustup target add i686-unknown-linux-gnu",
+        "clone-repo": "git clone --recursive https://github.com/MercuryWorkshop/anuraOS ./anuraOS || echo 'Repository already exists!'",
+        "build-project": "make all -C ./anuraOS && make rootfs -C ./anuraOS",
+        "server": "make server -C ./anuraOS"
+    },
     "dependencies": {
         "@mercuryworkshop/bare-mux": "^1.1.4",
         "@titaniumnetwork-dev/ultraviolet": "3.1.5",
@@ -27,7 +35,10 @@
         "onchange": "^7.1.0",
         "postcss": "^8.4.45",
         "postcss-cli": "^11.0.0",
-        "typescript": "^5.6.3"
+        "typescript": "^5.6.3",
+        "inotify-tools": "^3.22.1",
+        "jq": "^1.6.0",
+        "uuid": "^9.0.0"
     },
     "devDependencies": {
         "eslint": "9.13.0",
@@ -44,5 +55,9 @@
         "prettier": "3.3.3",
         "rollup": "^4.21.3",
         "workbox-cli": "7.1.0"
+    },
+    "engines": {
+        "node": ">=16.0.0",
+        "npm": ">=8.0.0"
     }
 }
